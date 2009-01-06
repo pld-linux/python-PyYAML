@@ -5,12 +5,12 @@
 Summary:	YAML parser and emitter module for Python
 Summary(pl.UTF8):	Analizator i generator formatu YAML dla języka Python
 Name:		python-%{module}
-Version:	3.06
+Version:	3.08
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pyyaml.org/download/pyyaml/%{module}-%{version}.tar.gz
-# Source0-md5:	3d3c92528f1547756c9e1d80d7d905c7
+# Source0-md5:	a4163a2017fa57f448c66815511fa555
 URL:		http://pyyaml.org/
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -48,14 +48,14 @@ plików konfiguracyjnych po serializację i przechowywanie obiektów.
 %setup -q -n %{module}-%{version}
 
 %build
-python setup.py build
+%{__python} setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-python setup.py install \
+%{__python} setup.py install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
