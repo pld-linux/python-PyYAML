@@ -3,18 +3,20 @@
 %define		module_dir	yaml
 #
 Summary:	YAML parser and emitter module for Python
-Summary(pl.UTF8):	Analizator i generator formatu YAML dla j臋zyka Python
+Summary(pl.UTF8):	Analizator i generator formatu YAML dla języka Python
 Name:		python-%{module}
-Version:	3.08
+Version:	3.09
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pyyaml.org/download/pyyaml/%{module}-%{version}.tar.gz
-# Source0-md5:	a4163a2017fa57f448c66815511fa555
+# Source0-md5:	f219af2361e87fdc5e85e95b84c11d87
 URL:		http://pyyaml.org/
-BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-devel
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python-modules
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -31,18 +33,19 @@ PyYAML is applicable for a broad range of tasks from complex
 configuration files to object serialization and persistance.
 
 %description -l pl.UTF-8
-YAML jest formatem serializacji danych czytelnym dla cz艂owieka,
-zaprojektowanym do interakcji w j臋zykach skryptowych. PyYAML jest
-analizatorem i generatorem tego formatu dla j臋zyka Python.
+YAML jest formatem serializacji danych czytelnym dla człowieka,
+zaprojektowanym do interakcji w językach skryptowych. PyYAML jest
+analizatorem i generatorem tego formatu dla języka Python.
 
-PyYAML posiada obs艂ug臋 pe艂nej analizy YAML 1.1, Unicode,
-serializacj臋 poprzez piklowanie, rozszerzalne API oraz zrozumia艂e
-komunikaty b艂臋d贸w. Obs艂uguje standardowe znaczniki YAML i
-dostarcza nowe, specyficzne dla j臋zyka Python, pozwalaj膮ce na
-reprezentacj臋 jego obiekt贸w.
+PyYAML posiada obsługę pełnej analizy YAML 1.1, Unicode,
+serializację poprzez piklowanie, rozszerzalne API oraz
+zrozumiałe komunikaty błędów. Obsługuje standardowe
+znaczniki YAML i dostarcza nowe, specyficzne dla języka Python,
+pozwalające na reprezentację jego obiektów.
 
-PyYAML mo偶e by膰 u偶yty w szerokiej gamie zastosowa艅, od z艂o偶onych
-plik贸w konfiguracyjnych po serializacj臋 i przechowywanie obiekt贸w.
+PyYAML może być użyty w szerokiej gamie zastosowań, od
+złożonych plików konfiguracyjnych po serializację i
+przechowywanie obiektów.
 
 %prep
 %setup -q -n %{module}-%{version}
@@ -70,5 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %dir %{py_sitedir}/%{module_dir}
 %{py_sitedir}/%{module_dir}/*.py[co]
+%if "%{py_ver}" > "2.4"
 %{py_sitedir}/*.egg-info
+%endif
 %{_examplesdir}/%{name}-%{version}
