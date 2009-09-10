@@ -1,0 +1,5 @@
+- up to 3.09
+- BR: rpm-pythonprov
+- python specific .egg-info
+- proper encoding in pl desc
+- build noarch
