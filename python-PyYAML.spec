@@ -3,7 +3,7 @@
 %define		module_dir	yaml
 #
 Summary:	YAML parser and emitter module for Python
-Summary(pl.UTF8):	Analizator i generator formatu YAML dla języka Python
+Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python
 Name:		python-%{module}
 Version:	3.09
 Release:	4
