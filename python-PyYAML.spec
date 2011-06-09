@@ -5,12 +5,12 @@
 Summary:	YAML parser and emitter module for Python
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python
 Name:		python-%{module}
-Version:	3.09
-Release:	4
+Version:	3.10
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pyyaml.org/download/pyyaml/%{module}-%{version}.tar.gz
-# Source0-md5:	f219af2361e87fdc5e85e95b84c11d87
+# Source0-md5:	74c94a383886519e9e7b3dd1ee540247
 URL:		http://pyyaml.org/
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
@@ -37,22 +37,21 @@ YAML jest formatem serializacji danych czytelnym dla człowieka,
 zaprojektowanym do interakcji w językach skryptowych. PyYAML jest
 analizatorem i generatorem tego formatu dla języka Python.
 
-PyYAML posiada obsługę pełnej analizy YAML 1.1, Unicode,
-serializację poprzez piklowanie, rozszerzalne API oraz
-zrozumiałe komunikaty błędów. Obsługuje standardowe
-znaczniki YAML i dostarcza nowe, specyficzne dla języka Python,
-pozwalające na reprezentację jego obiektów.
+PyYAML posiada obsługę pełnej analizy YAML 1.1, Unicode, serializację
+poprzez piklowanie, rozszerzalne API oraz zrozumiałe komunikaty
+błędów. Obsługuje standardowe znaczniki YAML i dostarcza nowe,
+specyficzne dla języka Python, pozwalające na reprezentację jego
+obiektów.
 
-PyYAML może być użyty w szerokiej gamie zastosowań, od
-złożonych plików konfiguracyjnych po serializację i
-przechowywanie obiektów.
+PyYAML może być użyty w szerokiej gamie zastosowań, od złożonych
+plików konfiguracyjnych po serializację i przechowywanie obiektów.
 
 %prep
 %setup -q -n %{module}-%{version}
 
 %build
-%{__python} setup.py --with-libyaml build 
-    
+%{__python} setup.py --with-libyaml build
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
