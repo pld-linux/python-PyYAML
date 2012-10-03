@@ -1,4 +1,7 @@
 #
+# TODO:
+#	- the name should be python-yaml (used via 'import yaml')
+#
 %define		module		PyYAML
 %define		module_dir	yaml
 #
