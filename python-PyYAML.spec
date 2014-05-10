@@ -9,7 +9,7 @@ Summary:	YAML parser and emitter module for Python
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python
 Name:		python-%{module}
 Version:	3.10
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pyyaml.org/download/pyyaml/%{module}-%{version}.tar.gz
