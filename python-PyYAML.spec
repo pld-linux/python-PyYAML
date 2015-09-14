@@ -13,7 +13,7 @@ Summary:	YAML parser and emitter module for Python
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python
 Name:		python-%{module}
 Version:	3.11
-Release:	4
+Release:	5
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pyyaml.org/download/pyyaml/%{module}-%{version}.tar.gz
@@ -138,6 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/%{module_dir}
 %{py3_sitedir}/%{module_dir}/*.py
 %{py3_sitedir}/%{module_dir}//__pycache__
-%attr(755,root,root) %{py3_sitedir}/_yaml.cpython-*m.so
+%attr(755,root,root) %{py3_sitedir}/_yaml.cpython-*.so
 %{py3_sitedir}/PyYAML-3.11-py*.egg-info
 %endif
