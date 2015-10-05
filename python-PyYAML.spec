@@ -9,8 +9,8 @@
 %define		module		PyYAML
 %define		module_dir	yaml
 #
-Summary:	YAML parser and emitter module for Python
-Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python
+Summary:	YAML parser and emitter module for Python 2
+Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
 Version:	3.11
 Release:	5
@@ -27,30 +27,11 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	python-modules
 %endif
 %if %{with python3}
-BuildRequires:	python3-devel
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-distribute
 BuildRequires:	python3-modules
 %endif
-
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%package -n python3-%{module}
-Summary:	YAML parser and emitter module for Python
-Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python
-Group:		Libraries/Python
-
-%description -n python3-%{module}
-PyYAML features a complete YAML 1.1 parser, Unicode support, pickle
-support, capable extension API, and sensible error messages. PyYAML
-supports standard YAML tags and provides Python-specific tags that
-allow to represent an arbitrary Python object.
-
-%description -n python3-%{module} -l pl.UTF-8
-PyYAML posiada obsługę pełnej analizy YAML 1.1, Unicode, serializację
-poprzez piklowanie, rozszerzalne API oraz zrozumiałe komunikaty
-błędów. Obsługuje standardowe znaczniki YAML i dostarcza nowe,
-specyficzne dla języka Python, pozwalające na reprezentację jego
-obiektów.
 
 %description
 YAML is a data serialization format designed for human readability and
@@ -78,6 +59,24 @@ obiektów.
 
 PyYAML może być użyty w szerokiej gamie zastosowań, od złożonych
 plików konfiguracyjnych po serializację i przechowywanie obiektów.
+
+%package -n python3-%{module}
+Summary:	YAML parser and emitter module for Python 3
+Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 3
+Group:		Libraries/Python
+
+%description -n python3-%{module}
+PyYAML features a complete YAML 1.1 parser, Unicode support, pickle
+support, capable extension API, and sensible error messages. PyYAML
+supports standard YAML tags and provides Python-specific tags that
+allow to represent an arbitrary Python object.
+
+%description -n python3-%{module} -l pl.UTF-8
+PyYAML posiada obsługę pełnej analizy YAML 1.1, Unicode, serializację
+poprzez piklowanie, rozszerzalne API oraz zrozumiałe komunikaty
+błędów. Obsługuje standardowe znaczniki YAML i dostarcza nowe,
+specyficzne dla języka Python, pozwalające na reprezentację jego
+obiektów.
 
 %prep
 %setup -q -n %{module}-%{version}
@@ -112,6 +111,7 @@ rm -rf $RPM_BUILD_ROOT
         --root=$RPM_BUILD_ROOT
 %endif
 %py_postclean
+
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -p examples/yaml-highlight/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -126,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/_yaml.so
 %{py_sitedir}/%{module_dir}/*.py[co]
 %if "%{py_ver}" > "2.4"
-%{py_sitedir}/*.egg-info
+%{py_sitedir}/PyYAML-%{version}-py*.egg-info
 %endif
 %{_examplesdir}/%{name}-%{version}
 %endif
@@ -137,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %dir %{py3_sitedir}/%{module_dir}
 %{py3_sitedir}/%{module_dir}/*.py
-%{py3_sitedir}/%{module_dir}//__pycache__
+%{py3_sitedir}/%{module_dir}/__pycache__
 %attr(755,root,root) %{py3_sitedir}/_yaml.cpython-*.so
-%{py3_sitedir}/PyYAML-3.11-py*.egg-info
+%{py3_sitedir}/PyYAML-%{version}-py*.egg-info
 %endif
