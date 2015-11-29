@@ -23,7 +23,7 @@ BuildRequires:	yaml-devel
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 Requires:	python-modules
 %endif
 %if %{with python3}
