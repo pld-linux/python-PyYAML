@@ -1,35 +1,34 @@
+# TODO: should it be renamed? import name is "yaml", but source, egg and pypi names are "PyYAML"
 #
-# TODO:
-#	- the name should be python-yaml (used via 'import yaml')
-#
-
+# Conditional build:
 %bcond_without  python2 # CPython 2.x module
 %bcond_without  python3 # CPython 3.x module
 
 %define		module		PyYAML
-%define		module_dir	yaml
-#
 Summary:	YAML parser and emitter module for Python 2
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
-Version:	3.11
-Release:	7
+Version:	3.12
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pyyaml.org/download/pyyaml/%{module}-%{version}.tar.gz
-# Source0-md5:	f50e08ef0fe55178479d3a618efe21db
+# Source0-md5:	4c129761b661d181ebf7ff4eb2d79950
 URL:		http://pyyaml.org/
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	yaml-devel
 %if %{with python2}
-BuildRequires:	python-devel
-BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
-Requires:	python-modules
+BuildRequires:	python-Cython
+BuildRequires:	python-devel >= 1:2.7
+BuildRequires:	python-modules >= 1:2.7
 %endif
 %if %{with python3}
-BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-modules
+BuildRequires:	python3-Cython
+BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	python3-modules >= 1:3.4
 %endif
+Requires:	python-modules >= 1:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,6 +62,7 @@ plików konfiguracyjnych po serializację i przechowywanie obiektów.
 Summary:	YAML parser and emitter module for Python 3
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 3
 Group:		Libraries/Python
+Requires:	python3-modules >= 1:3.4
 
 %description -n python3-%{module}
 PyYAML features a complete YAML 1.1 parser, Unicode support, pickle
@@ -84,12 +84,14 @@ obiektów.
 %if %{with python2}
 CC="%{__cc}" \
 CFLAGS="%{rpmcflags}" \
-%{__python} setup.py --with-libyaml build --build-base build-2 %{?with_tests:test}
+%{__python} setup.py --with-libyaml \
+	build --build-base build-2 %{?with_tests:test}
 %endif
 %if %{with python3}
 CC="%{__cc}" \
 CFLAGS="%{rpmcflags}" \
-%{__python3} setup.py --with-libyaml build --build-base build-3 %{?with_tests:test}
+%{__python3} setup.py --with-libyaml \
+	build --build-base build-3 %{?with_tests:test}
 %endif
 
 %install
@@ -112,23 +114,21 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc README
-%dir %{py_sitedir}/%{module_dir}
+%doc CHANGES LICENSE README
+%dir %{py_sitedir}/yaml
 %attr(755,root,root) %{py_sitedir}/_yaml.so
-%{py_sitedir}/%{module_dir}/*.py[co]
-%if "%{py_ver}" > "2.4"
+%{py_sitedir}/yaml/*.py[co]
 %{py_sitedir}/PyYAML-%{version}-py*.egg-info
-%endif
 %{_examplesdir}/%{name}-%{version}
 %endif
 
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc README
-%dir %{py3_sitedir}/%{module_dir}
-%{py3_sitedir}/%{module_dir}/*.py
-%{py3_sitedir}/%{module_dir}/__pycache__
+%doc CHANGES LICENSE README
+%dir %{py3_sitedir}/yaml
+%{py3_sitedir}/yaml/*.py
+%{py3_sitedir}/yaml/__pycache__
 %attr(755,root,root) %{py3_sitedir}/_yaml.cpython-*.so
 %{py3_sitedir}/PyYAML-%{version}-py*.egg-info
 %endif
