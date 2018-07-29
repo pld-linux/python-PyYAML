@@ -12,6 +12,9 @@ Version:	4.1
 Release:	1
 License:	MIT
 Group:		Libraries/Python
+#Source0Download: https://github.com/yaml/pyyaml/releases
+# TODO:
+#Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar.gz
 Source0:	https://github.com/yaml/pyyaml/archive/%{version}.tar.gz
 # Source0-md5:	9e4e48a27e42c28b39cdf4bf9b781f28
 URL:		https://github.com/yaml/pyyaml
@@ -96,17 +99,22 @@ CFLAGS="%{rpmcflags}" \
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %if %{with python2}
 %py_install
-%py_postclean
-%endif
-%if %{with python3}
-%py3_install
-%endif
+
 %py_postclean
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -p examples/yaml-highlight/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+%endif
+
+%if %{with python3}
+%py3_install
+
+install -d $RPM_BUILD_ROOT%{_examplesdir}/python3-PyYAML-%{version}
+cp -p examples/yaml-highlight/* $RPM_BUILD_ROOT%{_examplesdir}/python3-PyYAML-%{version}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -115,9 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES LICENSE README
-%dir %{py_sitedir}/yaml
 %attr(755,root,root) %{py_sitedir}/_yaml.so
-%{py_sitedir}/yaml/*.py[co]
+%{py_sitedir}/yaml
 %{py_sitedir}/PyYAML-%{version}-py*.egg-info
 %{_examplesdir}/%{name}-%{version}
 %endif
@@ -126,9 +133,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-%{module}
 %defattr(644,root,root,755)
 %doc CHANGES LICENSE README
-%dir %{py3_sitedir}/yaml
-%{py3_sitedir}/yaml/*.py
-%{py3_sitedir}/yaml/__pycache__
 %attr(755,root,root) %{py3_sitedir}/_yaml.cpython-*.so
+%{py3_sitedir}/yaml
 %{py3_sitedir}/PyYAML-%{version}-py*.egg-info
+%{_examplesdir}/python3-PyYAML-%{version}
 %endif
