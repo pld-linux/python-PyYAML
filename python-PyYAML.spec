@@ -1,26 +1,25 @@
-# TODO: should it be renamed? import name is "yaml", but source, egg and pypi names are "PyYAML"
+# note: uses name after egg/pypi; import name is "yaml", source is "pyyaml"
 #
 # Conditional build:
-%bcond_without  python2 # CPython 2.x module
-%bcond_without  python3 # CPython 3.x module
+%bcond_without	python2	# CPython 2.x module
+%bcond_without	python3	# CPython 3.x module
+%bcond_without	tests	# unit tests
 
 %define		module		PyYAML
 Summary:	YAML parser and emitter module for Python 2
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
-Version:	4.1
+Version:	5.1
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://github.com/yaml/pyyaml/releases
-# TODO:
-#Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar.gz
-Source0:	https://github.com/yaml/pyyaml/archive/%{version}.tar.gz
-# Source0-md5:	9e4e48a27e42c28b39cdf4bf9b781f28
+Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar.gz
+# Source0-md5:	7d201eec206eb8d78261bfc1d4a98691
 URL:		https://github.com/yaml/pyyaml
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
-BuildRequires:	yaml-devel
+BuildRequires:	yaml-devel >= 0.2.2
 %if %{with python2}
 BuildRequires:	python-Cython
 BuildRequires:	python-devel >= 1:2.7
@@ -32,6 +31,7 @@ BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	python3-modules >= 1:3.4
 %endif
 Requires:	python-modules >= 1:2.7
+Requires:	yaml >= 0.2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -65,6 +65,7 @@ plików konfiguracyjnych po serializację i przechowywanie obiektów.
 Summary:	YAML parser and emitter module for Python 3
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 3
 Group:		Libraries/Python
+Requires:	yaml >= 0.2.2
 Requires:	python3-modules >= 1:3.4
 
 %description -n python3-%{module}
