@@ -10,7 +10,7 @@ Summary:	YAML parser and emitter module for Python 2
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
 Version:	5.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://github.com/yaml/pyyaml/releases
@@ -19,6 +19,7 @@ Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar
 URL:		https://github.com/yaml/pyyaml
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
+BuildRequires:	sed >= 4.0
 BuildRequires:	yaml-devel >= 0.2.2
 %if %{with python2}
 BuildRequires:	python-Cython
@@ -108,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -p examples/yaml-highlight/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+%{__sed} -i -e '1s,/usr/bin/python,%{__python},' $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/yaml_hl.py
 %endif
 
 %if %{with python3}
@@ -115,6 +117,7 @@ cp -p examples/yaml-highlight/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/python3-PyYAML-%{version}
 cp -p examples/yaml-highlight/* $RPM_BUILD_ROOT%{_examplesdir}/python3-PyYAML-%{version}
+%{__sed} -i -e '1s,/usr/bin/python,%{__python3},' $RPM_BUILD_ROOT%{_examplesdir}/python3-PyYAML-%{version}/yaml_hl.py
 %endif
 
 %clean
