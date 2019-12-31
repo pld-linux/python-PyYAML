@@ -9,13 +9,13 @@
 Summary:	YAML parser and emitter module for Python 2
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
-Version:	5.1
-Release:	2
+Version:	5.2
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://github.com/yaml/pyyaml/releases
 Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar.gz
-# Source0-md5:	7d201eec206eb8d78261bfc1d4a98691
+# Source0-md5:	464430ee31d2bcfb2e746158674c7c5c
 URL:		https://github.com/yaml/pyyaml
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
