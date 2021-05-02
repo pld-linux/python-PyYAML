@@ -9,13 +9,13 @@
 Summary:	YAML parser and emitter module for Python 2
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
-Version:	5.3.1
-Release:	2
+Version:	5.4.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://github.com/yaml/pyyaml/releases
 Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar.gz
-# Source0-md5:	4088b396761b8e1f9ccdaa995ae3f3d2
+# Source0-md5:	93f82c27e9449fb73131834dfd147001
 URL:		https://github.com/yaml/pyyaml
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -127,8 +127,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES LICENSE README
-%attr(755,root,root) %{py_sitedir}/_yaml.so
-%{py_sitedir}/yaml
+%dir %{py_sitedir}/_yaml
+%{py_sitedir}/_yaml/*.py[co]
+%dir %{py_sitedir}/yaml
+%{py_sitedir}/yaml/*.py[co]
+%attr(755,root,root) %{py_sitedir}/yaml/_yaml.so
 %{py_sitedir}/PyYAML-%{version}-py*.egg-info
 %{_examplesdir}/%{name}-%{version}
 %endif
@@ -137,8 +140,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-%{module}
 %defattr(644,root,root,755)
 %doc CHANGES LICENSE README
-%attr(755,root,root) %{py3_sitedir}/_yaml.cpython-*.so
-%{py3_sitedir}/yaml
+%dir %{py3_sitedir}/_yaml
+%{py3_sitedir}/_yaml/*.py
+%{py3_sitedir}/_yaml/__pycache__
+%dir %{py3_sitedir}/yaml
+%{py3_sitedir}/yaml/*.py
+%{py3_sitedir}/yaml/__pycache__
+%attr(755,root,root) %{py3_sitedir}/yaml/_yaml.cpython-*.so
 %{py3_sitedir}/PyYAML-%{version}-py*.egg-info
 %{_examplesdir}/python3-PyYAML-%{version}
 %endif
