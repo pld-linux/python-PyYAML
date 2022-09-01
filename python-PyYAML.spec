@@ -9,13 +9,14 @@
 Summary:	YAML parser and emitter module for Python 2
 Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
-Version:	5.4.1
-Release:	4
+# keep 5.x here for python2 support
+Version:	5.4.1.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
-#Source0Download: https://github.com/yaml/pyyaml/releases
+#Source0Download: https://github.com/yaml/pyyaml/tags
 Source0:	https://github.com/yaml/pyyaml/archive/%{version}/pyyaml-%{version}.tar.gz
-# Source0-md5:	93f82c27e9449fb73131834dfd147001
+# Source0-md5:	6ea31369c4e4c852a58e772592c971e7
 URL:		https://github.com/yaml/pyyaml
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -132,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/yaml
 %{py_sitedir}/yaml/*.py[co]
 %attr(755,root,root) %{py_sitedir}/yaml/_yaml.so
-%{py_sitedir}/PyYAML-%{version}-py*.egg-info
+%{py_sitedir}/PyYAML-5.4.1-py*.egg-info
 %{_examplesdir}/%{name}-%{version}
 %endif
 
@@ -147,6 +148,6 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/yaml/*.py
 %{py3_sitedir}/yaml/__pycache__
 %attr(755,root,root) %{py3_sitedir}/yaml/_yaml.cpython-*.so
-%{py3_sitedir}/PyYAML-%{version}-py*.egg-info
+%{py3_sitedir}/PyYAML-5.4.1-py*.egg-info
 %{_examplesdir}/python3-PyYAML-%{version}
 %endif
