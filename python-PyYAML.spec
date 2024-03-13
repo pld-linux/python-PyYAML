@@ -2,7 +2,7 @@
 #
 # Conditional build:
 %bcond_without	python2	# CPython 2.x module
-%bcond_without	python3	# CPython 3.x module
+%bcond_with	python3	# CPython 3.x module (built from python3-PyYAML.spec)
 %bcond_without	tests	# unit tests
 
 %define		module		PyYAML
