@@ -11,7 +11,7 @@ Summary(pl.UTF-8):	Analizator i generator formatu YAML dla języka Python 2
 Name:		python-%{module}
 # keep 5.x here for python2 support
 Version:	5.4.1.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://github.com/yaml/pyyaml/tags
